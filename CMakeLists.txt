@@ -1,0 +1,73 @@
+cmake_minimum_required(VERSION 3.5)
+project(forost)
+
+# Default to C99
+if(NOT CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 99)
+endif()
+
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+  set(CMAKE_CXX_STANDARD_REQUIRED ON)
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(forost_interfaces REQUIRED)
+find_package(behaviortree_cpp REQUIRED)
+
+add_executable(btros_main src/btros_main.cpp)
+
+add_library(${PROJECT_NAME}_python_iface
+  src/ROSServiceConditionNode.cpp
+  src/ROSServiceSyncActionNode.cpp
+)
+
+target_include_directories(${PROJECT_NAME}_python_iface PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+target_include_directories(btros_main PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+
+target_link_libraries(${PROJECT_NAME}_python_iface
+  BT::behaviortree_cpp
+)
+target_link_libraries(btros_main
+  ${PROJECT_NAME}_python_iface
+)
+
+set(dependencies
+  rclcpp
+  forost_interfaces
+)
+
+ament_target_dependencies(${PROJECT_NAME}_python_iface
+  ${dependencies}
+)
+ament_target_dependencies(btros_main
+  ${dependencies}
+)
+
+install(TARGETS
+  btros_main
+  ${PROJECT_NAME}_python_iface
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  # the following line skips the linter which checks for copyrights
+  # uncomment the line when a copyright and license is not present in all source files
+  #set(ament_cmake_copyright_FOUND TRUE)
+  # the following line skips cpplint (only works in a git repo)
+  # uncomment the line when this package is not in a git repo
+  #set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()
