@@ -38,8 +38,10 @@ namespace forost {
                 return BT::NodeStatus::FAILURE;
             case forost_interfaces::srv::ActionIface::Response::SUCCESS:
                 return BT::NodeStatus::SUCCESS;
+            case forost_interfaces::srv::ActionIface::Response::RUNNING:
+                return BT::NodeStatus::RUNNING;
             default:
-                return BT::NodeStatus::FAILURE;
+                throw BT::RuntimeError("Unsupported return status value");
         }
     }
 

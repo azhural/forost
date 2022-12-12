@@ -39,7 +39,7 @@ namespace forost {
             case forost_interfaces::srv::ConditionIface::Response::SUCCESS:
                 return BT::NodeStatus::SUCCESS;
             default:
-                return BT::NodeStatus::FAILURE;
+                throw BT::RuntimeError("Unsupported status value");
         }
     }
 
