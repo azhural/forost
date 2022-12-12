@@ -1,4 +1,4 @@
-#include <forost/ConditionNode.h>>
+#include <forost/ConditionNode.h>
 #include <forost_interfaces/srv/condition_iface.hpp>
 
 namespace forost {
