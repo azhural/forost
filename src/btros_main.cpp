@@ -1,7 +1,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <behaviortree_cpp/bt_factory.h>
-#include <forost/ROSServiceConditionNode.h>
-#include <forost/ROSServiceSyncActionNode.h>
+#include <forost/ConditionNode.h>
+#include <forost/SyncActionNode.h>
 
 int main(int argc, char ** argv)
 {
@@ -15,8 +15,8 @@ int main(int argc, char ** argv)
 
   BT::BehaviorTreeFactory factory;
 
-  factory.registerNodeType<forost::ROSServiceConditionNode>("ROSServiceConditionNode");
-  factory.registerNodeType<forost::ROSServiceSyncActionNode>("ROSServiceSyncActionNode");
+  factory.registerNodeType<forost::ConditionNode>("foROStConditionNode");
+  factory.registerNodeType<forost::SyncActionNode>("foROStSyncActionNode");
 
   auto tree = factory.createTreeFromFile(bt_xml);
 

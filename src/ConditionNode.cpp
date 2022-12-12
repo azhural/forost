@@ -1,21 +1,21 @@
-#include <forost/ROSServiceConditionNode.h>
+#include <forost/ConditionNode.h>>
 #include <forost_interfaces/srv/condition_iface.hpp>
 
 namespace forost {
 
-    ROSServiceConditionNode::ROSServiceConditionNode(const std::string& name, const BT::NodeConfig& config) 
+    ConditionNode::ConditionNode(const std::string& name, const BT::NodeConfig& config) 
     : BT::ConditionNode(name, config)
     {
 
     }
 
-    BT::PortsList ROSServiceConditionNode::providedPorts() {
+    BT::PortsList ConditionNode::providedPorts() {
         return {
             BT::InputPort<std::string>("topic")
         };
     }
 
-    BT::NodeStatus ROSServiceConditionNode::tick() {
+    BT::NodeStatus ConditionNode::tick() {
         BT::Expected<std::string> topic = TreeNode::getInput<std::string>("topic");
         if(!topic) {
             throw BT::RuntimeError("Missing required input [topic]: ", topic.error());

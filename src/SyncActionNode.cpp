@@ -1,21 +1,21 @@
-#include <forost/ROSServiceSyncActionNode.h>
+#include <forost/SyncActionNode.h>
 #include <forost_interfaces/srv/action_iface.hpp>
 
 namespace forost {
 
-    ROSServiceSyncActionNode::ROSServiceSyncActionNode(const std::string& name, const BT::NodeConfig& config)
+    SyncActionNode::SyncActionNode(const std::string& name, const BT::NodeConfig& config)
     : BT::SyncActionNode(name, config)
     {
 
     }
 
-    BT::PortsList ROSServiceSyncActionNode::providedPorts() {
+    BT::PortsList SyncActionNode::providedPorts() {
         return {
             BT::InputPort<std::string>("topic")
         };
     }
 
-    BT::NodeStatus ROSServiceSyncActionNode::tick() {
+    BT::NodeStatus SyncActionNode::tick() {
         BT::Expected<std::string> topic = TreeNode::getInput<std::string>("topic");
         if(!topic) {
             throw BT::RuntimeError("Missing required input [topic]: ", topic.error());

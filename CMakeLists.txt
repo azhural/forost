@@ -23,8 +23,8 @@ find_package(behaviortree_cpp REQUIRED)
 add_executable(btros_main src/btros_main.cpp)
 
 add_library(${PROJECT_NAME}_python_iface
-  src/ROSServiceConditionNode.cpp
-  src/ROSServiceSyncActionNode.cpp
+  src/ConditionNode.cpp
+  src/SyncActionNode.cpp
 )
 
 target_include_directories(${PROJECT_NAME}_python_iface PUBLIC
