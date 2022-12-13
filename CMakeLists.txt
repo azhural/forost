@@ -16,9 +16,10 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(ament_index_cpp REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(forost_interfaces REQUIRED)
-find_package(behaviortree_cpp REQUIRED)
+find_package(behaviortree_cpp_v3 REQUIRED)
 
 add_executable(btros_main src/btros_main.cpp)
 
@@ -35,7 +36,7 @@ target_include_directories(btros_main PUBLIC
   $<INSTALL_INTERFACE:include>)
 
 target_link_libraries(${PROJECT_NAME}_python_iface
-  BT::behaviortree_cpp
+  BT::behaviortree_cpp_v3
 )
 target_link_libraries(btros_main
   ${PROJECT_NAME}_python_iface

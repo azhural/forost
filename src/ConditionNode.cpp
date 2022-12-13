@@ -3,7 +3,7 @@
 
 namespace forost {
 
-    ConditionNode::ConditionNode(const std::string& name, const BT::NodeConfig& config) 
+    ConditionNode::ConditionNode(const std::string& name, const BT::NodeConfiguration& config)
     : BT::ConditionNode(name, config)
     {
 
@@ -16,7 +16,7 @@ namespace forost {
     }
 
     BT::NodeStatus ConditionNode::tick() {
-        BT::Expected<std::string> topic = TreeNode::getInput<std::string>("topic");
+        BT::Optional<std::string> topic = TreeNode::getInput<std::string>("topic");
         if(!topic) {
             throw BT::RuntimeError("Missing required input [topic]: ", topic.error());
         }

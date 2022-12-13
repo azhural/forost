@@ -1,5 +1,5 @@
 #include <rclcpp/rclcpp.hpp>
-#include <behaviortree_cpp/bt_factory.h>
+#include <behaviortree_cpp_v3/bt_factory.h>
 #include <forost/ConditionNode.h>
 #include <forost/SyncActionNode.h>
 
@@ -23,7 +23,7 @@ int main(int argc, char ** argv)
   auto status = BT::NodeStatus::RUNNING;
 
   while(rclcpp::ok() && status == BT::NodeStatus::RUNNING) {
-    status = tree.tickOnce();
+    status = tree.tickRoot();
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
 
