@@ -6,7 +6,7 @@ This is intended for Python ROS2 users, as it is already possible to use ROS fun
 
 ## Requirements
 
-Install BehaviorTree.CPP v3.8 via apt: `ros-foxy-behaviortree-cpp-v3' or in your ROS workspace.
+Install BehaviorTree.CPP v3.8 via apt: `ros-foxy-behaviortree-cpp-v3` or in your ROS workspace.
 https://github.com/BehaviorTree/BehaviorTree.CPP
 
 Get `forost_interfaces` which includes the ROS2 message types used in this package.
